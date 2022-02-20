@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-# data "aws_region" "current" {
-#   provider = "aws.region"
-# }
-
 locals {
   name   = "stkbailey"
   region = "us-east-2" #data.aws_region.current.name
@@ -18,7 +14,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 3"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -76,7 +72,7 @@ module "security_group" {
 
 module "db" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "~> 4"
+  version = "~> 3.5"
 
   identifier = "${local.name}-default"
 
