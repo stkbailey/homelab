@@ -29,9 +29,9 @@ module "vpc" {
   create_database_subnet_group = true
   create_database_subnet_route_table     = true
   create_database_internet_gateway_route = true
-
   enable_dns_hostnames = true
   enable_dns_support   = true
+  map_public_ip_on_launch = true
 
   public_subnet_tags = {
     Name = "${local.name}-public"
@@ -64,7 +64,7 @@ module "security_group" {
       to_port     = 5432
       protocol    = "tcp"
       description = "PostgreSQL access from all addresses"
-      cidr_blocks = "0.0.0.0/32"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 
@@ -97,6 +97,7 @@ module "db" {
   random_password_length = 24
   port                   = 5432
 
+  create_db_subnet_group = false
   db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
   publicly_accessible = true
