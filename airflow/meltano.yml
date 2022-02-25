@@ -1,0 +1,67 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: 6f071543-0634-4733-b0a3-e61b016b88c6
+plugins:
+  extractors:
+  - name: tap-s3-csv-main-backend
+    namespace: tap_s3_csv
+    pip_url: git+https://github.com/transferwise/pipelinewise-tap-s3-csv.git
+    executable: tap-s3-csv
+    capabilities:
+    - discover
+    - properties
+    - state
+    settings:
+    - name: start_date
+      kind: date_iso8601
+    - name: bucket
+      kind: string
+    - name: tables
+      kind: array
+    - name: aws_profile
+    config:
+      aws_profile: whatnot_eng_admin
+      bucket: whatnot-dms-target-backend-prod
+      start_date: "2020-01-01T00:00:00Z"
+      tables:
+      - search_prefix: "public/categories/"
+        search_pattern: ".*.csv"
+        table_name: "categories"
+        key_properties: ["id"]
+        delimiter: ","
+    select:
+    - '*.*'
+  - name: tap-s3-csv-apps-flyer
+    namespace: tap_s3_csv
+    pip_url: git+https://github.com/transferwise/pipelinewise-tap-s3-csv.git
+    executable: tap-s3-csv
+    capabilities:
+    - discover
+    - properties
+    - state
+    settings:
+    - name: start_date
+      kind: date_iso8601
+    - name: bucket
+      kind: string
+    - name: tables
+      kind: array
+    - name: aws_profile
+    config:
+      aws_profile: whatnot_eng_admin
+      bucket: af-datalocker-2022-01-10-whatnot-prod
+      start_date: "2020-01-01T00:00:00Z"
+      tables:
+      - search_prefix: "df56-acc-fedc77SY-df56/data-locker-hourly/t=skad_installs/dt=2022-01-21/h=23"
+        search_pattern: ".*.gz"
+        table_name: "skad_install"
+        key_properties: ["id"]
+        delimiter: ","
+    select:
+    - '*.*'
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
+    config:
+      destination_path: "output"
