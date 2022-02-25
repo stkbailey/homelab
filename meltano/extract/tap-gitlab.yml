@@ -1,3 +1,5 @@
+version: 1
+
 plugins:
   extractors:
   - name: tap-gitlab

@@ -165,3 +165,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 terraform.tfstate
+
+.DS_Store

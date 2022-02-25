@@ -1,3 +1,5 @@
+version: 1
+
 plugins:
   loaders:
   - name: target-jsonl
