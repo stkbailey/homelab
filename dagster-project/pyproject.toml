@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "dagster-project"
+version = "0.1.0"
+description = ""
+authors = ["Stephen Bailey <stkbailey@gmail.com>"]
+readme = "README.md"
+packages = [{include = "dagster_project"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+dagster = "^1.1.7"
+dagit = "^1.1.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.dagster]
+module_name = "dagster_project"
