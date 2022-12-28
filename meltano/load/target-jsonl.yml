@@ -1,7 +1,0 @@
-version: 1
-
-plugins:
-  loaders:
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
