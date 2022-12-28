@@ -1,7 +1,0 @@
-version: 1
-send_anonymous_usage_stats: true
-project_id: 6f15ef08-db9d-4ead-9367-abec85529c39
-
-include_paths:
-  - './extract/*.yml'
-  - './load/*.yml'
